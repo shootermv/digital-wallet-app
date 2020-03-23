@@ -1,11 +1,11 @@
-const config = require('config.json');
+
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 
 dotenv.config();
-
-mongoose.connect(process.env.DB, (err) => {
+mongoose.set('useCreateIndex', true)
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (err) {
       console.log(`MONGO CONNECTION ERROR: ${err}`)  
       throw err;
