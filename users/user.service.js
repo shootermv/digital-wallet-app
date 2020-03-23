@@ -22,14 +22,11 @@ async function authenticate({ username, password }) {
     }
 }
 
-
-
 async function getById(id) {
     return await User.findById(id).select('-hash');
 }
 
 async function transfer(fromId, sum, toId) {
-
    const fromUser = await User.findById(fromId).select('-hash');
    const toUser = await User.findById(toId).select('-hash');
    if (fromUser.balance < sum) {
@@ -41,7 +38,6 @@ async function transfer(fromId, sum, toId) {
    await toUser.save();
    return {succcess: true};
 }
-
 
 async function create(userParam) {
     // validate
