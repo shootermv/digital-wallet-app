@@ -16,6 +16,5 @@ mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: tr
 mongoose.Promise = global.Promise;
 
 module.exports = {
-    User: require('../users/user.model')//,
-    //Task: require('../tasks/task.model'),
+    User: require('../users/user.model')
 };
