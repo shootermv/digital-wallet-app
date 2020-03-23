@@ -6,7 +6,8 @@ const User = db.User;
 
 module.exports = {
     authenticate,
-    getById
+    getById,
+    create
 };
 
 async function authenticate({ username, password }) {
@@ -25,4 +26,22 @@ async function authenticate({ username, password }) {
 
 async function getById(id) {
     return await User.findById(id).select('-hash');
+}
+
+async function create(userParam) {
+    // validate
+    if (await User.findOne({ username: userParam.username })) {
+        throw 'Username "' + userParam.username + '" is already taken';
+    }
+
+    const user = new User(userParam);
+
+    // hash password
+    if (userParam.password) {
+        user.hash = bcrypt.hashSync(userParam.password, 10);
+    }
+
+    // save user
+    await user.save();
+    return user;
 }

@@ -1,47 +1,30 @@
 const mongoose = require('mongoose');
-
-
+const userService = require('../../users/user.service');
 
 class Seeder {
-    //_userSerice;  
-    constructor(User, Task) {
-      this._userService = User;
-      this._taskService = Task;
-    }
-
     async seedDB() {
+        console.log('seeding started...');
         await this.cleanDB();
         await this.seedUsers();
-        await this.seedTasks();
         console.log('seeding all finished...');
     }
 
     // cleans db 
-    async cleanDB() {      
-        await mongoose.connection.collections['users'].remove();
-        console.log('"users" collection dropped');
-      
-        await mongoose.connection.collections['tasks'].remove();
-        console.log('"tasks" collection dropped');      
+    async cleanDB() {    
+        const collections = ['users'];
+        for (let list of  collections) {
+            await mongoose.connection.collections[list].remove();
+            console.log(`"${list}" collection dropped`);
+        }
     }
-
-    // seed users
+    
+    // seed Users
     async seedUsers() {
-        console.log('seeding users...');
+        //console.log('seeding users started...');
         for (let user of require('./users.json')) {
-            await this._userService.create(user);   
+            await userService.create(user);   
         }
-        console.log('seeding users finished...');
+        //console.log('seeding users finished...');
     }
-
-    // seed tasks
-    async seedTasks() {
-        console.log('seeding tasks...');
-        for (let task of require('./tasks.json')) {
-            await this._taskService.create(task);   
-        }
-        console.log('seeding tasks finished...');
-    }    
-
 }
 module.exports = Seeder; 

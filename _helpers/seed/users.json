@@ -2,34 +2,12 @@
     "firstName": "admin",
     "lastName": "adminovich",
     "username": "admin",
-    "role": "admin",
-    "password": "12345"
+    "password": "12345",
+    "balance": 1400
 },{
-
     "firstName": "Moshe",
     "lastName": "Vilner",
     "username": "moshe",
-    "role": "developer",
-    "tasks": [{
-        "_id": "12345",
-        "summary": "task 1 for moshe",
-        "status": 0
-    }],
-    "password": "12345"
-},{
-
-    "firstName": "Matt",
-    "lastName": "Zalen",
-    "username": "Matt",
-    "role": "developer",
-    "tasks": [],
-    "password": "12345"
-},{
-
-    "firstName": "Yoav",
-    "lastName": "Sneider",
-    "username": "Yoav",
-    "role": "developer",
-    "tasks": [],
-    "password": "12345"
+    "password": "54321",
+    "balance": 30
 }]
