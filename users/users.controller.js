@@ -1,12 +1,15 @@
 ﻿const express = require('express');
 const router = express.Router();
+const RequestQ = require('express-request-queue');
+
+const q = new RequestQ();
 const userService = require('./user.service');
 
 // routes
 router.post('/login', authenticate);
 router.get('/current', getCurrent);
 router.get('/balance', getBalance);
-router.post('/transfer', transfer);
+router.post('/transfer', q.run( transfer));
 
 module.exports = router;
 
@@ -28,7 +31,7 @@ function getBalance(req, res, next) {
         .catch(err => next(err));
 }
 
-function transfer(req, res, next) {
+async function transfer(req, res, next) {
     userService.transfer(req.user.sub, req.body.sum, req.body.toId)
         .then(result => res.json(result))
         .catch(err => next(err));
