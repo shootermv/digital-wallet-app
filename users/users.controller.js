@@ -6,6 +6,7 @@ const userService = require('./user.service');
 router.post('/login', authenticate);
 router.get('/current', getCurrent);
 router.get('/balance', getBalance);
+router.post('/transfer', transfer);
 
 module.exports = router;
 
@@ -23,6 +24,12 @@ function getCurrent(req, res, next) {
 
 function getBalance(req, res, next) {
     userService.getById(req.user.sub)
-        .then(user => user ? res.json(user.balance) : res.sendStatus(404))
+        .then(user => res.json(user.balance))
+        .catch(err => next(err));
+}
+
+function transfer(req, res, next) {
+    userService.transfer(req.user.sub, req.body.sum, req.body.toId)
+        .then(result => res.json(result))
         .catch(err => next(err));
 }

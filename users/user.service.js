@@ -6,7 +6,8 @@ const User = db.User;
 module.exports = {
     authenticate,
     getById,
-    create
+    create,
+    transfer
 };
 
 async function authenticate({ username, password }) {
@@ -26,6 +27,21 @@ async function authenticate({ username, password }) {
 async function getById(id) {
     return await User.findById(id).select('-hash');
 }
+
+async function transfer(fromId, sum, toId) {
+
+   const fromUser = await User.findById(fromId).select('-hash');
+   const toUser = await User.findById(toId).select('-hash');
+   if (fromUser.balance < sum) {
+       throw new Error('You Cannot transfer more money than you have')
+   }
+   fromUser.balance = fromUser.balance - sum;
+   toUser.balance = toUser.balance + sum;
+   await fromUser.save();
+   await toUser.save();
+   return {succcess: true};
+}
+
 
 async function create(userParam) {
     // validate
