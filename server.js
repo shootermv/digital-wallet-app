@@ -15,7 +15,6 @@ app.use(jwt());
 
 // api routes
 app.use('/api/users', require('./users/users.controller'));
-app.use('/api/movies', require('./movies/movie.controller'));
 
 
 if (process.env.SEED === 'true') {

@@ -5,7 +5,7 @@ const userService = require('./user.service');
 // routes
 router.post('/login', authenticate);
 router.get('/current', getCurrent);
-
+router.get('/balance', getBalance);
 
 module.exports = router;
 
@@ -18,5 +18,11 @@ function authenticate(req, res, next) {
 function getCurrent(req, res, next) {
     userService.getById(req.user.sub)
         .then(user => user ? res.json(user) : res.sendStatus(404))
+        .catch(err => next(err));
+}
+
+function getBalance(req, res, next) {
+    userService.getById(req.user.sub)
+        .then(user => user ? res.json(user.balance) : res.sendStatus(404))
         .catch(err => next(err));
 }
