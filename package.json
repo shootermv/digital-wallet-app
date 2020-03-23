@@ -35,6 +35,7 @@
         "testEnvironment": "node",
         "coveragePathIgnorePatterns": [
             "/node_modules/"
-        ]
+        ],
+        "setupTestFrameworkScriptFile": "./tests/setup.js"
     }
 }
