@@ -3,11 +3,11 @@
     "lastName": "adminovich",
     "username": "admin",
     "password": "12345",
-    "balance": 1400
+    "balance": {"USD": 1400, "EUR": 400 }
 },{
     "firstName": "Moshe",
     "lastName": "Vilner",
     "username": "moshe",
     "password": "54321",
-    "balance": 30
+    "balance": {"USD": 30}
 }]

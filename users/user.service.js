@@ -26,14 +26,17 @@ async function getById(id) {
     return await User.findById(id).select('-hash');
 }
 
-async function transfer(fromId, sum, toId) {
+async function transfer(fromId, sum, currency, toId) {
    const fromUser = await User.findById(fromId).select('-hash');
    const toUser = await User.findById(toId).select('-hash');
-   if (fromUser.balance < sum) {
+   if (fromUser.balance.get(currency) < sum) {
        throw new Error('You Cannot transfer more money than you have')
    }
-   fromUser.balance = fromUser.balance - sum;
-   toUser.balance = toUser.balance + sum;
+   if (!toUser) {
+       throw new Error('User you trying to transfer cannot be found')
+   }
+   fromUser.balance.set(currency, fromUser.balance.get(currency) - sum);
+   toUser.balance.set(currency, toUser.balance.get(currency) + sum);
    await fromUser.save();
    await toUser.save();
    return {succcess: true};

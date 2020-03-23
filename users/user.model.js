@@ -7,7 +7,10 @@ const schema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     createdDate: { type: Date, default: Date.now },
-    balance: {type: Number}
+    balance:  {
+        type: Map,
+        of: Number
+    }
 });
 
 schema.set('toJSON', { virtuals: true });

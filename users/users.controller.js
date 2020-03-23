@@ -32,7 +32,7 @@ function getBalance(req, res, next) {
 }
 
 async function transfer(req, res, next) {
-    userService.transfer(req.user.sub, req.body.sum, req.body.toId)
+    userService.transfer(req.user.sub, req.body.sum, req.body.currency, req.body.toId)
         .then(result => res.json(result))
         .catch(err => next(err));
 }
