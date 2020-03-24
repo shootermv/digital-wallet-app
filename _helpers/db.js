@@ -2,8 +2,9 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'
+dotenv.config({ path: envFile })
 
-dotenv.config();
 mongoose.set('useCreateIndex', true)
 mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (err) {

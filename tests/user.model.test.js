@@ -5,6 +5,9 @@ const User = mongoose.model('User');
 
 
 describe('Users', () => {
+  afterEach(async () => {
+    await User.deleteMany();
+  });
   describe('CREATE', () => {
     
     test('can create a user', async () => {
