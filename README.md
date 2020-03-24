@@ -2,6 +2,12 @@
 ## Motivation
 I wanted to create nodejs-mongo express app that supports concurrent requests
 
+## This Project Includes
+* Jwt Token Autthentication
+* api to fetch balance with multiple currencies
+* api to transfer sums of some currency between users
+* unit test using `jest` & `supertest` packages
+
 ## How To Run
 * You must have mongodb server installed on your machine
 * create .env file and set variables like following:
