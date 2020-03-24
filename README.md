@@ -6,7 +6,7 @@ I wanted to create nodejs-mongo express app that supports concurrent requests
 * Database Seeding
 * Jwt Token Autthentication
 * api to fetch balance with multiple currencies
-* api to transfer sums of some currency between users
+* api to transfer sums of some currency between users (supports concurrenrcy)
 * unit test using `jest` & `supertest` packages
 
 ## How To Run
