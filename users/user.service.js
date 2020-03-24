@@ -35,6 +35,9 @@ async function transfer(fromId, sum, currency, toId) {
     if (!toUser) {
         throw new Error('User you trying to transfer cannot be found')
     }
+    if (!fromUser.balance.has(currency)) {
+        throw new Error('You have No currency of this type')
+    }
     fromUser.balance.set(currency, fromUser.balance.get(currency) - sum);
     toUser.balance.set(currency, toUser.balance.has(currency) ? toUser.balance.get(currency) + sum : sum);
 
