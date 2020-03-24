@@ -27,19 +27,22 @@ async function getById(id) {
 }
 
 async function transfer(fromId, sum, currency, toId) {
-   const fromUser = await User.findById(fromId).select('-hash');
-   const toUser = await User.findById(toId).select('-hash');
-   if (fromUser.balance.get(currency) < sum) {
-       throw new Error('You Cannot transfer more money than you have')
-   }
-   if (!toUser) {
-       throw new Error('User you trying to transfer cannot be found')
-   }
-   fromUser.balance.set(currency, fromUser.balance.get(currency) - sum);
-   toUser.balance.set(currency, toUser.balance.get(currency) + sum);
-   await fromUser.save();
-   await toUser.save();
-   return {succcess: true};
+    const fromUser = await User.findById(fromId).select('-hash');
+    const toUser = await User.findById(toId).select('-hash');
+    if (fromUser.balance.get(currency) < sum) {
+        throw new Error('You Cannot transfer more money than you have')
+    }
+    if (!toUser) {
+        throw new Error('User you trying to transfer cannot be found')
+    }
+    fromUser.balance.set(currency, fromUser.balance.get(currency) - sum);
+    toUser.balance.set(currency, toUser.balance.has(currency) ? toUser.balance.get(currency) + sum : sum);
+
+
+
+    await fromUser.save();
+    await toUser.save();
+    return { succcess: true };
 }
 
 async function create(userParam) {

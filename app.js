@@ -11,13 +11,15 @@ const Seeder = require('./_helpers/seed/Seeder');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(errorHandler);// global error handler
+
 
 // use JWT auth to secure the api
 app.use(jwt());
 
 // api routes
 app.use('/api/users', require('./users/users.controller'));
+
+app.use(errorHandler);// global error handler
 
 // seeding stuff
 if (process.env.SEED === 'true') {
